@@ -1,6 +1,6 @@
 ---
 title: "Hack The Box: Retro - Makine Çözümü (Write-up)"
-date: 2026-04-12 18:00:00 +0300
+date: 2026-04-12 12:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, smb, rpc, impacket, privilege-escalation, windows]
 ---
