@@ -71,7 +71,7 @@ Sistemdeki en kritik aşama, servis hesaplarının yetkilerini kullanarak üst d
 ## 5. Final: Domain Admin ve Root Bayrağı
 
 **Adım 1:** Aldığımız `.pfx` sertifikasını `certipy auth` ile kullanarak Administrator kullanıcısının NTLM hash'ini alıyoruz.
-![Admin Hash](/assets/img/certified/elde%20ettiğim%20administrator.pfx%20ile%20admin%20hashi.jpeg)
+![Admin Hash](/assets/img/certified/eldeettigimadministratorileadminhashi.jpeg)
 
 **Adım 2:** Bu hash'in geçerliliğini NetExec (nxc) ile doğruluyoruz (Pwn3d!).
 ![NetExec Doğrulama](/assets/img/certified/smb%20ile%20kontrol%20edildi.jpeg)
