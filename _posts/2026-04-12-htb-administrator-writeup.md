@@ -47,7 +47,7 @@ BloodHound ile Active Directory ortamının haritasını çıkardığımızda, k
 ![Şifre Bulundu](/assets/img/administrator/backupşifrebulundu.jpeg)
 
 **Adım 3 (Kasa İçeriği):** `pwsafe` aracıyla Emily'nin parolasını alıyoruz.
-![Pwsafe Çalıştırma](/assets/img/administrator/pwsafetuygulaması.jpeg)
+![Pwsafe Çalıştırma](/assets/img/administrator/pwsafeuygulaması.jpeg)
 ![Kasa İçi](/assets/img/administrator/uygulamaiçi.jpeg)
 
 **Adım 4 (User Bayrağı):** Emily ile bağlanıp bayrağı alıyoruz.
