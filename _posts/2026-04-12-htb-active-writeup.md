@@ -108,3 +108,4 @@ Yine Impacket araç setinden `wmiexec.py` kullanarak Administrator kimlik bilgil
 **Adım 2: Root Bayrağı**
 Doğrudan `C:\Users\Administrator\Desktop` dizinine giderek **root.txt** dosyasını okuyoruz ve makineyi tamamen ele geçiriyoruz!
 ![Root Flag](/assets/img/active/root.jpeg)
+---
