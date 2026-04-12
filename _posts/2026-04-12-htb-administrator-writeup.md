@@ -1,11 +1,11 @@
 ---
-title: "Hack The Box: Administrator - Makine Çözümü (Write-up)"
+title: "Hack The Box: Administrator - Write-up"
 date: 2026-04-12 15:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, ftp, psafe3, hashcat, targeted-kerberoasting, dcsync, windows]
 ---
 
-# 👑 Hack The Box: Administrator - Tam Kapsamlı Sızma Testi Raporu
+# 👑 Hack The Box: Administrator
 
 **İşletim Sistemi:** Windows
 **Hedef:** AD Yetki Zinciri (GenericAll & ForceChangePassword), Password Safe (psafe3) Kırımı, Targeted Kerberoasting ve DCSync ile Domain'i Ele Geçirme.
@@ -23,7 +23,7 @@ Operasyona elimizdeki `olivia` kullanıcısının kimlik bilgileriyle (`ichliebe
 
 ## 2. Yetki Yükseltme Zinciri: Olivia -> Michael -> Benjamin
 
-BloodHound ile Active Directory ortamının haritasını çıkardığımızda, karşımıza sömürülmeyi bekleyen harika bir yetki zinciri çıkıyor!
+BloodHound ile Active Directory ortamının haritasını çıkardığımızda, karşımıza bir yetki zinciri çıkıyor.
 ![Yetki Zinciri](/assets/img/administrator/oliviabloodhound.jpeg)
 
 **Adım 1:** `net rpc` aracı ile Michael'ın parolasını zorla `Yavuz123` olarak değiştiriyoruz.
