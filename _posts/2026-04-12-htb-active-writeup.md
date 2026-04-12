@@ -1,6 +1,6 @@
 ---
 title: "Hack The Box: Active - Makine Çözümü (Write-up)"
-2026-04-12 12:00:00 +0300
+date: 2026-04-12 12:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, smb, gpp, cpassword, kerberoasting, pentest, windows, easy]
 ---
