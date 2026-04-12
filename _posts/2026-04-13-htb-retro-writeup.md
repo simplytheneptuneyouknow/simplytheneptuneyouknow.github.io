@@ -27,7 +27,7 @@ Hedef sistem üzerinde gerçekleştirdiğimiz Nmap taraması, makinenin bir Doma
 Active Directory ortamlarında düşük yetkili veya anonim erişimler bazen çok kritik bilgileri sızdırabilir.
 
 **Adım 1:** NetExec kullanarak `Guest` kullanıcısı ile SMB paylaşımlarını tarıyoruz. `Trainees` paylaşımına okuma yetkimiz olduğunu fark ediyoruz.
-![SMB Paylaşımları](/assets/img/retro/asilnxcguest.jpg)
+![SMB Paylaşımları](/assets/img/retro/asilnxcguest.jpeg)
 
 **Adım 2:** `smbclient` ile paylaşıma bağlanıyoruz. Klasör içinde `ToDo.txt` ve ilk hedefimiz olan `user.txt` bayrağını buluyoruz.
 ![User Flag](/assets/img/retro/todo.jpeg)
