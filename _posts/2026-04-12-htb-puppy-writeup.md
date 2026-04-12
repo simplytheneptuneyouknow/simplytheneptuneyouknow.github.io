@@ -111,3 +111,4 @@ Ardından `attrib -h -s` komutuyla gizliliklerini kaldırıp Kali'ye indirdik.
 
 **Final:** Tam yetkili Admin parolasını aldıktan sonra son kez Evil-WinRM ile sisteme bağlandık. Administrator masaüstüne gidip **root.txt** bayrağını dalgalandırdık. Sistem tamamen ele geçirilmiştir!
 ![Root Flag](/assets/img/puppy/VE%20ADMİN%20FLAG.jpeg)
+---
