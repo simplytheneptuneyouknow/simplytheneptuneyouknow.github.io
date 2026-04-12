@@ -23,71 +23,60 @@ Operasyona elimizdeki `olivia` kullanıcısının kimlik bilgileriyle (`ichliebe
 
 ## 2. Yetki Yükseltme Zinciri: Olivia -> Michael -> Benjamin
 
-BloodHound ile Active Directory ortamının haritasını çıkardığımızda, karşımıza sömürülmeyi bekleyen harika bir yetki zinciri çıkıyor! BloodHound grafiğine göre; **`OLIVIA`** kullanıcısı **`MICHAEL`** üzerinde `GenericAll` (Tam Yetki) hakkına, **`MICHAEL`** ise **`BENJAMIN`** üzerinde `ForceChangePassword` (Parola Sıfırlama) hakkına sahip.
-![Yetki Zinciri](/assets/img/administrator/olivia%20bloodhound.jpeg)
+BloodHound ile Active Directory ortamının haritasını çıkardığımızda, karşımıza sömürülmeyi bekleyen harika bir yetki zinciri çıkıyor!
+![Yetki Zinciri](/assets/img/administrator/oliviabloodhound.jpeg)
 
-**Adım 1 (Olivia -> Michael):** `GenericAll` yetkimizi kullanarak, `net rpc` aracı ile Michael'ın parolasını zorla `Yavuz123` olarak değiştiriyoruz.
-![Michael Pass Değişimi](/assets/img/administrator/net%20rpc%20password.jpeg)
+**Adım 1:** `net rpc` aracı ile Michael'ın parolasını zorla `Yavuz123` olarak değiştiriyoruz.
+![Michael Pass Değişimi](/assets/img/administrator/netrpcpassword.jpeg)
 
-*NetExec ile kontrol ettiğimizde Michael'ın yeni parolasıyla sisteme başarıyla giriş yaptığımızı doğruluyoruz:*
-![Michael Pass Kontrol](/assets/img/administrator/michael%20pass%20kontrolü.jpeg)
+*NetExec kontrolü:*
+![Michael Pass Kontrol](/assets/img/administrator/michaelpasskontrolü.jpeg)
 
-**Adım 2 (Michael -> Benjamin):** Şimdi Michael'ın kimliğine bürünerek onun `ForceChangePassword` yetkisini suistimal ediyoruz ve Benjamin'in parolasını da `Yavuz123` olarak güncelliyoruz.
-![Benjamin Pass Değişimi](/assets/img/administrator/benjamin%20pass%20değişim.jpeg)
+**Adım 2:** Benjamin'in parolasını da `Yavuz123` olarak güncelliyoruz.
+![Benjamin Pass Değişimi](/assets/img/administrator/benjaminpassdeğişim.jpeg)
 
 ---
 
-## 3. FTP Erişimi ve Kasanın Bulunması
+## 3. FTP Erişimi ve Ganimetin Bulunması
 
-Parolasını ele geçirdiğimiz `benjamin` kullanıcısıyla hedef sistemdeki FTP servisine bağlanıyoruz.
+**Adım 1:** FTP üzerinden **`Backup.psafe3`** dosyasını indiriyoruz.
+![FTP İndirme](/assets/img/administrator/ftpdosyaçekme.jpeg)
 
-**Adım 1:** FTP dizinlerini listelediğimizde karşımıza **`Backup.psafe3`** adında bir parola kasası dosyası çıkıyor ve bunu kendi makinemize indiriyoruz.
-![FTP İndirme](/assets/img/administrator/ftp%20dosya%20çekme%20.jpeg)
+**Adım 2 (Kasa Kırımı):** Hashcat ile ana parolayı kırıyoruz: **`tequieromucho`**
+![Hashcat Kırma](/assets/img/administrator/backupkırma.jpeg)
+![Şifre Bulundu](/assets/img/administrator/backupşifrebulundu.jpeg)
 
-**Adım 2 (Kasa Kırımı):** Bu kasayı açabilmek için ana parolasına ihtiyacımız var. Hashcat (`-m 5200` modu) ve `rockyou.txt` sözlüğünü kullanarak kasaya kaba kuvvet saldırısı başlatıyoruz.
-![Hashcat Kırma](/assets/img/administrator/backup%20kırma.jpeg)
+**Adım 3 (Kasa İçeriği):** `pwsafe` aracıyla Emily'nin parolasını alıyoruz.
+![Pwsafe Çalıştırma](/assets/img/administrator/pwsafetuygulaması.jpeg)
+![Kasa İçi](/assets/img/administrator/uygulamaiçi.jpeg)
 
-Kısa süre içinde Hashcat bize ana parolayı veriyor: **`tequieromucho`**!
-![Şifre Bulundu](/assets/img/administrator/backup%20şifre%20bulundu.jpeg)
-
-**Adım 3 (Kasa İçeriği):** Bulduğumuz parolayla kasayı `pwsafe` aracı üzerinden açıyoruz.
-![Pwsafe Çalıştırma](/assets/img/administrator/pwsafe%20uygulaması.jpeg)
-
-Kasanın grafik arayüzünde Alexander, Emily ve Emma'nın kayıtlı olduğunu görüyoruz. Buradan **`emily`** kullanıcısına ait parolayı alıyoruz.
-![Kasa İçi](/assets/img/administrator/uygulama%20içi%20.jpeg)
-
-NetExec ile test ettiğimizde Emily'nin parolasının geçerli olduğunu doğruluyoruz.
-![Emily Parola Kontrolü](/assets/img/administrator/emily%20password%20kontrolü.jpeg)
-
-**Adım 4 (User Bayrağı):** Emily kimlik bilgileriyle Evil-WinRM üzerinden sisteme bağlanıp **user.txt** bayrağını cebe indiriyoruz!
-![User Flag](/assets/img/administrator/user%20flag.jpeg)
+**Adım 4 (User Bayrağı):** Emily ile bağlanıp bayrağı alıyoruz.
+![Emily Parola Kontrolü](/assets/img/administrator/emilypasswordkontrolü.jpeg)
+![User Flag](/assets/img/administrator/userflag.jpeg)
 
 ---
 
 ## 4. Targeted Kerberoasting: Emily -> Ethan
 
-İçerideyiz. Emily ile BloodHound haritasına tekrar baktığımızda, Emily'nin **`ethan`** kullanıcısı üzerinde `GenericWrite` yetkisi olduğunu keşfediyoruz.
-![Emily Bloodhound](/assets/img/administrator/emily%20bloodhound.jpeg)
+Emily'nin **`ethan`** üzerindeki yetkisini keşfediyoruz.
+![Emily Bloodhound](/assets/img/administrator/emilybloodhound.jpeg)
 
-**Adım 1:** `GenericWrite` yetkisini kullanarak `targetedKerberoast.py` betiği ile Ethan'a geçici bir SPN (Service Principal Name) atıyor ve Kerberos hash'ini çekiyoruz!
-![Targeted Kerberoast](/assets/img/administrator/ethan%20hash.jpeg)
+**Adım 1:** Ethan için Kerberos hash'ini çekiyoruz.
+![Targeted Kerberoast](/assets/img/administrator/ethanhash.jpeg)
 
-**Adım 2:** Elde ettiğimiz bu hash'i Hashcat (`-m 13100` modu) ile kırıyoruz.
-![Ethan Hash Kırma](/assets/img/administrator/ethan%20hash%20kırma.jpeg)
-
-Ethan'ın parolası açığa çıkıyor: **`limpbizkit`**
-![Ethan Şifre Kırıldı](/assets/img/administrator/ethan%20hash%20kırıldı.jpeg)
+**Adım 2:** Hash'i kırıyoruz: **`limpbizkit`**
+![Ethan Hash Kırma](/assets/img/administrator/ethanhashkırma.jpeg)
+![Ethan Şifre Kırıldı](/assets/img/administrator/ethanhashkırıldı.jpeg)
 
 ---
 
 ## 5. Domain'in Düşüşü: DCSync ve Root
 
-Neden bu kadar uğraşıp Ethan hesabını aldık? Çünkü BloodHound'a göre `ethan` hesabı Domain üzerinde **`GetChangesAll`** hakkına sahip! Bu, Domain'deki herkesin hash'ini çekebileceğimiz anlamına geliyor.
-![Ethan Yetkileri](/assets/img/administrator/ethan%20bloodhound%20yetkileri.jpeg)
+Ethan'ın Domain üzerindeki `GetChangesAll` hakkını suistimal ediyoruz.
+![Ethan Yetkileri](/assets/img/administrator/ethanbloodhoundyetkileri.jpeg)
 
-**Adım 1 (DCSync):** Impacket'in `secretsdump.py` aracını kullanarak Domain Controller'dan **Administrator** dahi olmak üzere herkesin NTLM hash'lerini (NTDS.dit) başarıyla sızdırıyoruz.
-![Secretsdump](/assets/img/administrator/User%20hashleri.jpeg)
+**Adım 1 (DCSync):** Tüm NTLM hash'lerini sızdırıyoruz.
+![Secretsdump](/assets/img/administrator/Userhashleri.jpeg)
 
-**Adım 2 (Root Bayrağı):** Çaldığımız Administrator hash'i ile Pass-the-Hash (PtH) saldırısı gerçekleştirerek Evil-WinRM üzerinden en yetkili oturumumuzu elde ediyor ve **root.txt** bayrağını okuyarak makineyi tamamen ele geçiriyoruz! Sistem "Pwned"!
-![Root Flag](/assets/img/administrator/root%20flag.jpeg)
----
+**Adım 2 (Root Bayrağı):** Administrator olarak bağlanıp makineyi bitiriyoruz.
+![Root Flag](/assets/img/administrator/rootflag.jpeg)
