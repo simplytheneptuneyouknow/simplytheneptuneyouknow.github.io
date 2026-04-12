@@ -42,9 +42,9 @@ Bu sürüm, kritik bir RCE zafiyeti olan **Drupalgeddon 2 (CVE-2018-7600)** sald
 
 **Adım 3: İlk Erişim (Foothold)**
 Exploit aracılığıyla sistemde komut çalıştırıyor (RCE) ve kendi payload'umuzu (`payload.exe`) sisteme aktararak bir reverse shell elde ediyoruz.
-![RCE Başarılı](/assets/img/bastard/rce%20yedi.jpg)
-![Payload Aktarımı](/assets/img/bastard/payload%20aktarımı.jpg)
-![Shell Geldi](/assets/img/bastard/shell%20geldi.jpg)
+![RCE Başarılı](/assets/img/bastard/rce%20yedi.jpeg)
+![Payload Aktarımı](/assets/img/bastard/payload%20aktarımı.jpeg)
+![Shell Geldi](/assets/img/bastard/shell%20geldi.jpeg)
 
 Düşük yetkili kullanıcı ile ilk bayrağı alıyoruz.
 ![User Flag](/assets/img/bastard/user%20flag.jpeg)
