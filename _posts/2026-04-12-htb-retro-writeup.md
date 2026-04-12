@@ -1,11 +1,11 @@
 ---
-title: "Hack The Box: Retro - Makine Çözümü (Write-up)"
+title: "Hack The Box: Retro - Write-up"
 date: 2026-04-12 12:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, smb, rpc, impacket, privilege-escalation, windows]
 ---
 
-# 🕹️ Hack The Box: Retro - Sızma Testi Raporu
+# 🕹️ Hack The Box: Retro
 
 **İşletim Sistemi:** Windows
 **Hedef:** SMB Null Session Keşfi, Bilgi Sızıntısı (Information Disclosure), Machine Account Parola Sıfırlama ve Domain Admin Erişimi.
@@ -52,5 +52,5 @@ Elde ettiğimiz makine hesabı yetkileriyle sistem üzerinde en üst yetkilere s
 **Adım 1 (WinRM Erişimi):** Administrator hash'ini veya doğrudan yetkili bir oturumu kullanarak Evil-WinRM üzerinden sisteme giriş yapıyoruz.
 ![WinRM Giriş](/assets/img/retro/winrm%20giriş.jpeg)
 
-**Adım 2 (Final):** Administrator masaüstüne giderek **root.txt** bayrağını okuyoruz ve operasyonu başarıyla tamamlıyoruz!
+**Adım 2 (Final):** Administrator masaüstüne giderek **root.txt** bayrağını okuyoruz.
 ![Root Flag](/assets/img/retro/asilsonucwinrm.jpeg)
