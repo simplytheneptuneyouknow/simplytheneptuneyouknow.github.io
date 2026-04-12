@@ -40,7 +40,7 @@ BloodHound ile Active Directory ortamının haritasını çıkardığımızda, k
 ## 3. FTP Erişimi ve Ganimetin Bulunması
 
 **Adım 1:** FTP üzerinden **`Backup.psafe3`** dosyasını indiriyoruz.
-![FTP İndirme](/assets/img/administrator/ftpdosyaçekme.jpeg)
+![FTP İndirme](/assets/img/administrator/ftpdosyacekme.jpeg)
 
 **Adım 2 (Kasa Kırımı):** Hashcat ile ana parolayı kırıyoruz: **`tequieromucho`**
 ![Hashcat Kırma](/assets/img/administrator/backupkırma.jpeg)
@@ -65,7 +65,7 @@ Emily'nin **`ethan`** üzerindeki yetkisini keşfediyoruz.
 ![Targeted Kerberoast](/assets/img/administrator/ethanhash.jpeg)
 
 **Adım 2:** Hash'i kırıyoruz: **`limpbizkit`**
-![Ethan Hash Kırma](/assets/img/administrator/ethanhashkırma.jpeg)
+![Ethan Hash Kırma](/assets/img/administrator/ethanhashkirma.jpeg)
 ![Ethan Şifre Kırıldı](/assets/img/administrator/ethanhashkırıldı.jpeg)
 
 ---
