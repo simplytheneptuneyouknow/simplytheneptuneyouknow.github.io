@@ -1,11 +1,11 @@
 ---
-title: "Hack The Box: Baby - Makine Çözümü (Write-up)"
+title: "Hack The Box: Baby - Write-up"
 date: 2026-04-12 21:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, ldap, diskshadow, ntds, password-spraying, windows, medium]
 ---
 
-# 🍼 Hack The Box: Baby - Sızma Testi Raporu
+# 🍼 Hack The Box: Baby Write Up
 
 **Zorluk:** Medium  
 **İşletim Sistemi:** Windows  
@@ -31,7 +31,7 @@ Operasyona hedef sistemin LDAP servisini anonim olarak sorgulayarak başlıyoruz
 **Adım 1:** **Teresa Bell** kullanıcısının açıklama (description) kısmında sızan `BabyStart123!` parolasını buluyoruz.
 ![Parola Sızıntısı](/assets/img/baby/description%20da%20şifre%20bulunuyor.jpeg)
 
-**Adım 2 (Kritik Nokta):** Bu parolanın diğer kullanıcılar için geçerli olup olmadığını anlamak için NetExec (nxc) ile `Password Spraying` saldırısı gerçekleştiriyoruz. Listenin en sonunda **Caroline Robinson** kullanıcısı için `STATUS_PASSWORD_MUST_CHANGE` yanıtını alıyoruz. Bu, parolanın doğru olduğunu ancak değiştirilmesi gerektiğini gösteriyor!
+**Adım 2 (Kritik Nokta):** Bu parolanın diğer kullanıcılar için geçerli olup olmadığını anlamak için NetExec (nxc) ile `Password Spraying` saldırısı gerçekleştiriyoruz. Listenin en sonunda **Caroline Robinson** kullanıcısı için `STATUS_PASSWORD_MUST_CHANGE` yanıtını alıyoruz. Bu, parolanın doğru olduğunu ancak değiştirilmesi gerektiğini gösteriyor.
 ![Password Spray Başarılı](/assets/img/baby/yeni%20liste%20ile%20password%20sprey.jpeg)
 
 ---
@@ -59,7 +59,7 @@ Caroline üzerinden aldığımız yetkilerle Domain'in tüm parolalarını barı
 
 ## 5. Domain Ele Geçirme (DCSync & Hash Dump)
 
-**Adım 1:** Sızdırdığımız `ntds.dit`, `SAM` ve `SYSTEM` dosyalarını kendi makinemize indirip Impacket `secretsdump.py` ile Administrator hash'ini söküp alıyoruz.
+**Adım 1:** Sızdırdığımız `ntds.dit`, `SAM` ve `SYSTEM` dosyalarını kendi makinemize indirip Impacket `secretsdump.py` ile Administrator hash'ini alıyoruz.
 ![NTDS Download](/assets/img/baby/download%20ntds.jpeg)
 ![NTDS Secretdump](/assets/img/baby/ntds%20secretdump%20son.jpeg)
 
