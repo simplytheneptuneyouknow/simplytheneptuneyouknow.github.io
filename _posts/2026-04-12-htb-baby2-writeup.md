@@ -1,6 +1,6 @@
 ---
 title: "Hack The Box: Baby2 - Write-up"
-date: 2026-04-13 10:00:00 +0300
+date: 2026-04-12 10:00:00 +0300
 categories: [Walkthrough, HackTheBox]
 tags: [active-directory, gpo-abuse, bloodhound, powerview, acl, windows, hard]
 ---
