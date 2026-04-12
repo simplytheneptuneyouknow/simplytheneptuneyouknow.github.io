@@ -21,7 +21,7 @@ Operasyona hedef sistemin LDAP servisini anonim olarak sorgulayarak başlıyoruz
 ![Nmap Taraması](/assets/img/baby/nmap.jpeg)
 
 **Adım 2:** `ldapsearch` kullanarak dizindeki kullanıcıları anonim olarak listeliyoruz. Elde ettiğimiz kullanıcı adlarıyla bir `users.txt` listesi oluşturuyoruz.
-![LDAP Sorgusu](/assets/img/baby/ldap%20search.jpg)
+![LDAP Sorgusu](/assets/img/baby/ldap%20search.jpeg)
 ![Geniş LDAP Taraması](/assets/img/baby/daha%20geniş%20bir%20ldap%20search.jpeg)
 
 ---
