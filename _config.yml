@@ -14,7 +14,7 @@ timezone: Europe/Istanbul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: simplytheneptuneyouknow # the main title
+title: Neptune # the main title
 
 tagline: Cybersecurity & Pentesting Write-ups # it will display as the subtitle
 
