@@ -63,5 +63,3 @@ N.Thompson kullanıcısı ile sisteme dahil olduğumuzda, elimizdeki yetkileri t
 **Adım 2: Bayrakların Alınması** Elde edilen Administrator hash'i ile sisteme giriş yapıyor ve her iki bayrağı elde ediyoruz.
 ![User Flag](/assets/img/delegate/user%20flag.jpeg)
 ![Root Flag](/assets/img/delegate/rootflag.jpeg)
-
-> **Sistem Pwned!** Delegasyon suistimali başarıyla tamamlandı.
