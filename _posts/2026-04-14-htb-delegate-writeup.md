@@ -35,7 +35,6 @@ Operasyona her zaman olduğu gibi ağ üzerindeki servisleri ve giriş noktalar�
 ![SPN Atama](/assets/img/delegate/spn%20ekleme.jpeg)
 
 **Adım 3:** SPN atandıktan sonra kullanıcının Kerberos hash'ini çekiyoruz ve hashcat ile kırıyoruz. Parola: `KALEB_2341`.
-![Hash Çekme](/assets/img/delegate/targaretkerberos.jpeg)
 ![N.Thompson Hash](/assets/img/delegate/nthompson%20hash.jpeg)
 ![Hash Kırıldı](/assets/img/delegate/hash%20kırıldı.jpeg)
 
