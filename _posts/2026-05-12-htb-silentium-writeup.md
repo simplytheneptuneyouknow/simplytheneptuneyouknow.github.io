@@ -19,11 +19,11 @@ Operasyona hedef sistemin dış ağ yüzeyini haritalandırarak başlıyoruz.
 
 **Adım 1: Nmap Taraması**
 Hedefe yönelik Nmap taramamızda 22 (SSH) ve 80 (HTTP) portlarının açık olduğunu tespit ettik. 80 portuna gelen isteklerin `silentium.htb` adresine yönlendirildiğini (redirect) gördüğümüz için makinenin IP adresini `/etc/hosts` dosyamıza ekliyoruz.
-![Nmap Taraması ve Hosts Dosyası Düzenleme](nmapveetchosts.png)
+![Nmap Taraması ve Hosts Dosyası Düzenleme](/assets/img/silentium/nmapveetchosts.png)
 
 **Adım 2: VHOST (Sanal Sunucu) Keşfi**
 Ana web sayfasında ilerleyecek bir yol bulamayınca, alt alan adlarını bulmak için `gobuster` ile VHOST taraması gerçekleştiriyoruz. Bu tarama sonucunda HTTP 200 yanıtı veren **`staging.silentium.htb`** adresini keşfediyoruz ve bunu da hemen `/etc/hosts` dosyamıza ekliyoruz.
-![Gobuster VHOST Keşfi](/assets/img/silentium/gobuster arama.png)
+![Gobuster VHOST Keşfi](/assets/img/silentium/gobusterarama.png)
 ![Staging Hosts Dosyasına Ekleme](/assets/img/silentium/stagingitekrardanetchostaekledik.png)
 
 ---
@@ -82,12 +82,12 @@ Sistemde `root` olabilmek için iç ağdaki servisleri inceliyoruz. Hedef makine
 
 **Adım 1: Pivot İşlemi**
 `ssh -L 8080:127.0.0.1:3001 ben@silentium.htb` komutu ile hedef makinenin lokalindeki servisi kendi makinemizin 8080 portuna taşıyoruz.
-![SSH Pivot İşlemi](pivot.png)
+![SSH Pivot İşlemi](/assets/img/silentium/pivot.png)
 
 **Adım 2: Gogs Keşfi ve Kayıt**
 Tarayıcımızdan `http://127.0.0.1:8080` adresine giderek **Gogs** (Git servisi) arayüzüne ulaşıyoruz. Sisteme sızabilmek için `neptun` adında yeni bir kullanıcı oluşturuyor ve giriş yapıyoruz.
-![Gogs Arayüzü](gogs.png)
-![Gogs Kayıt ve Giriş](kayıtolupgirişyaptık.png)
+![Gogs Arayüzü](/assets/img/silentium/gogs.png)
+![Gogs Kayıt ve Giriş](/assets/img/silentium/kayıtolupgirişyaptık.png)
 
 **Adım 3: Personal Access Token (PAT) Üretimi**
 Gogs API'sini istismar etmek için hesap ayarlarından `deneme` adında tam yetkili bir Personal Access Token (Kişisel Erişim Belirteci) oluşturuyoruz.
@@ -105,7 +105,7 @@ Script arka planda zararlı bir repository oluşturarak `.git/config` dosyasın�
 
 **Adım 2: Root Bayrağını Alma**
 Gelen bağlantıyı `nc -lvnp 5555` ile yakaladıktan sonra doğrudan `/root/root.txt` dosyasını okuyoruz ve makineyi tam yetkiyle (Pwned) tamamlıyoruz!
-![Gogs RCE Exploit ve Root Bayrağı](veadminflagexploitileberaber.png)
+![Gogs RCE Exploit ve Root Bayrağı](/assets/img/silentium/veadminflagexploitileberaber.png)
 
 > **Sonuç:** Makine başarıyla tamamlandı!
 > **Kullanıcı:** `root`
