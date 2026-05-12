@@ -19,12 +19,13 @@ Operasyona hedef sistemin dış ağ yüzeyini haritalandırarak başlıyoruz.
 
 **Adım 1: Nmap Taraması**
 Hedefe yönelik Nmap taramamızda 22 (SSH) ve 80 (HTTP) portlarının açık olduğunu tespit ettik. 80 portuna gelen isteklerin `silentium.htb` adresine yönlendirildiğini (redirect) gördüğümüz için makinenin IP adresini `/etc/hosts` dosyamıza ekliyoruz.
-![Nmap Taraması ve Hosts Dosyası Düzenleme](nmap ve etchosts.png)
+![Nmap Taraması ve Hosts Dosyası Düzenleme]
+(/assets/img/silentium/nmap ve etchosts.png)
 
 **Adım 2: VHOST (Sanal Sunucu) Keşfi**
 Ana web sayfasında ilerleyecek bir yol bulamayınca, alt alan adlarını bulmak için `gobuster` ile VHOST taraması gerçekleştiriyoruz. Bu tarama sonucunda HTTP 200 yanıtı veren **`staging.silentium.htb`** adresini keşfediyoruz ve bunu da hemen `/etc/hosts` dosyamıza ekliyoruz.
-![Gobuster VHOST Keşfi](gobuster arama.png)
-![Staging Hosts Dosyasına Ekleme](stagingi tekrardan etchosta ekledik.png)
+![Gobuster VHOST Keşfi](/assets/img/silentium/gobuster arama.png)
+![Staging Hosts Dosyasına Ekleme](/assets/img/silentium/stagingi tekrardan etchosta ekledik.png)
 
 ---
 
@@ -34,11 +35,11 @@ Ana web sayfasında ilerleyecek bir yol bulamayınca, alt alan adlarını bulmak
 
 **Adım 1: Parola Sıfırlama İsteği ve Token Sızıntısı**
 `/api/v1/account/forgot-password` uç noktasına `ben@silentium.htb` kullanıcısı için bir JSON isteği gönderdiğimizde, sunucu bize sadece "E-posta gönderildi" demek yerine, veritabanındaki kullanıcı objesini olduğu gibi geri dönüyor! Bu objenin içinde zayıf bir Bcrypt hash'i ve parolayı sıfırlamak için gereken **`tempToken`** değeri bulunuyor.
-![Forgot Password ve Token Sızıntısı](ilk curl.png)
+![Forgot Password ve Token Sızıntısı](/assets/img/silentium/ilk curl.png)
 
 **Adım 2: Parolayı Değiştirme**
 Elde ettiğimiz `tempToken` değerini kullanarak `/api/v1/account/reset-password` uç noktasına ikinci bir istek atıyoruz ve `ben` kullanıcısının parolasını kendi belirlediğimiz bir şifreyle (`Yavuz123!`) değiştirerek hesabı tamamen ele geçiriyoruz.
-![Reset Password ve Hesap Ele Geçirme](ikinci curl.png)
+![Reset Password ve Hesap Ele Geçirme](/assets/img/silentium/ikinci curl.png)
 
 ---
 
@@ -48,17 +49,17 @@ Yeni şifremizle `staging.silentium.htb` adresine giriş yaptığımızda karş�
 
 **Adım 1: API Key Tespiti**
 Flowise ortamında komut çalıştırabilmek için API Keys bölümüne girerek `DefaultKey` değerini (`hWp_...`) kopyalıyoruz.
-![Flowise API Key Tespiti](giriş yapılıp api key alındı ve komuta basıldı.png)
+![Flowise API Key Tespiti](/assets/img/silentium/giriş yapılıp api key alındı ve komuta basıldı.png)
 
 **Adım 2: Reverse Shell ve Ortam Değişkeni (ENV) Avı**
 Aldığımız API Key ile `/api/v1/node-load-method/customMCP` uç noktasına bir `cURL` isteği atıyoruz. İstek içerisindeki `mcpServerConfig` parametresine Node.js `child_process.exec` fonksiyonunu kullanarak hazırladığımız Reverse Shell payload'umuzu gömüyoruz.
-![Flowise Reverse Shell Payload ve Bağlantı](shell alındı.png)
+![Flowise Reverse Shell Payload ve Bağlantı](/assets/img/silentium/shell alındı.png)
 
 Bağlantıyı 443 portumuzda yakaladıktan hemen sonra `env` komutunu çalıştırıyoruz. Ortam değişkenleri adeta bir altın madeni:
 * `FLOWISE_USERNAME=ben`
 * `FLOWISE_PASSWORD=F1l3_d0ck3r`
 * **`SMTP_PASSWORD=r04D!!_R4ge`**
-![Reverse Shell ve ENV Sızıntısı](bilgiler alındı.png)
+![Reverse Shell ve ENV Sızıntısı](/assets/img/silentium/bilgiler alındı.png)
 
 ---
 
@@ -68,7 +69,7 @@ Geliştiricilerin sıklıkla düştüğü "Parola Tekrar Kullanımı" (Password 
 
 **Adım 1: SSH Bağlantısı**
 `ben` kullanıcısı ve `r04D!!_R4ge` parolası ile hedef sisteme SSH üzerinden başarılı bir şekilde giriş yapıyoruz.
-![SSH Bağlantısı ve User Bayrağı](bilgiler ile ssha girildi ve flag alındı.png)
+![SSH Bağlantısı ve User Bayrağı](/assets/img/silentium/bilgiler ile ssha girildi ve flag alındı.png)
 
 > **Sonuç:** İlk hedefimiz tamamlandı!
 > **Kullanıcı:** `ben`
@@ -91,7 +92,7 @@ Tarayıcımızdan `http://127.0.0.1:8080` adresine giderek **Gogs** (Git servisi
 
 **Adım 3: Personal Access Token (PAT) Üretimi**
 Gogs API'sini istismar etmek için hesap ayarlarından `deneme` adında tam yetkili bir Personal Access Token (Kişisel Erişim Belirteci) oluşturuyoruz.
-![Gogs Token Üretimi](bu sayfadan token oluşturuyoruz.png)
+![Gogs Token Üretimi](/assets/img/silentium/bu sayfadan token oluşturuyoruz.png)
 
 ---
 
